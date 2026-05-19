@@ -52,13 +52,25 @@ resource "aws_dynamodb_table" "this" {
   }
 
   stream_enabled   = var.stream_enabled
-  stream_view_type = var.stream_view_type
+  stream_view_type = var.stream_enabled ? var.stream_view_type : null
 
   dynamic "ttl" {
     for_each = var.ttl_enabled ? [1] : []
     content {
       enabled        = var.ttl_enabled
       attribute_name = var.ttl_attribute_name
+    }
+  }
+
+  lifecycle {
+    precondition {
+      condition     = !var.stream_enabled || var.stream_view_type != ""
+      error_message = "stream_view_type must be set when stream_enabled is true."
+    }
+
+    precondition {
+      condition     = !var.ttl_enabled || var.ttl_attribute_name != ""
+      error_message = "ttl_attribute_name must be set when ttl_enabled is true."
     }
   }
 

@@ -115,7 +115,7 @@ variable "stream_enabled" {
 variable "stream_view_type" {
   description = "When an item in the table is modified, StreamViewType determines what information is written to the table's stream"
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "ttl_enabled" {
