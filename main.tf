@@ -40,12 +40,12 @@ resource "aws_dynamodb_table" "this" {
     }
   }
 
-  # PSA Compliance: Data Protection
+  # PSA Compliance: Req 1 (data protection)
   point_in_time_recovery {
     enabled = var.point_in_time_recovery_enabled
   }
 
-  # PSA Compliance: Encryption at rest
+  # PSA Compliance: Req 5 (database encryption at rest)
   server_side_encryption {
     enabled     = true
     kms_key_arn = var.kms_key_arn

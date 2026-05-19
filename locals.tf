@@ -5,8 +5,9 @@ locals {
   table_name  = var.table_name != "" ? var.table_name : "${local.name_prefix}-table"
 
   common_tags = merge(var.tags, {
-    "Project"     = var.project_name
-    "Environment" = var.environment
-    "ManagedBy"   = "Terraform"
+    "Project"       = var.project_name
+    "Environment"   = var.environment
+    "ManagedBy"     = "Terraform"
+    "PSA-Compliant" = "true"
   })
 }
